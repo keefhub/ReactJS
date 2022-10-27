@@ -4,8 +4,8 @@ are YouTube, books and Google. I mean.. they said google is your bestfriend... r
 into despite being tight on time. Can't be helped especially when I have already landed myself into this challenge..
 
 The tools which I will use while learning react is:
-Node.js (of course)
-VS code
+Node.js (of course),
+VS code and
 Operating on windows 11 (it'd be cool if I actually done it on a Ubuntu VM but due to time constraint I shall leave this exploration to another day)
 
 Sit back, relax and react to me learning React from scratch.
