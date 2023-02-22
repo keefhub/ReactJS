@@ -8,4 +8,4 @@ Node.js (of course),
 VS code and
 Operating on windows 11 (it'd be cool if I actually done it on a Ubuntu VM but due to time constraint I shall leave this exploration to another day)
 
-Sit back, relax and react to me learning React from scratch.
+Sit back, relax and react to me learning React from scratch :)
