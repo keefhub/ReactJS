@@ -8,6 +8,7 @@ class App extends Component {
     email: "",
     errors: [],
   };
+  // this is how in-line bind looks like validateUsernameOnBlur = this.validateUsernameOnBlur.bind(this);
   validateUsernameOnBlur = this.validateUsernameOnBlur.bind(this);
 
   displayForm() {
@@ -34,6 +35,7 @@ class App extends Component {
 
   validateUsernameOnBlur(event) {
     console.log("I should validate whatever is in", event.target.value);
+    this.setState();
   }
 
   render() {
