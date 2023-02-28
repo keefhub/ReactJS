@@ -1,45 +1,34 @@
 import React, { Component, useState } from "react";
 
-class fieldlength extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      blogPost: "",
-      charactercount: 0,
-      errors: [],
+      field: "",
     };
   }
 
-  TextArea() {
-    return (
-      <div>
-        <textarea
-          type="text"
-          onChange={(e) =>
-            this.setState({ charactercount: this.state.value.length })
-          }
-        />
-        <br />
-        <button onClick={this.submitBlog}>submit post</button>
-      </div>
-    );
+  renderFieldLength() {
+    return <p>{`${this.state.field.length} character(s)!`}</p>;
   }
-
-  submitBlog() {
-    alert("submit blog?");
+  updateFieldLength(event) {
+    const field = event.target.value;
+    this.setState({ field });
   }
 
   render() {
     return (
-      <div className="fieldlength">
-        <h1>Blog Post Writer</h1>
-        <hr />
-        <h4>Write your post here</h4>
-        {this.TextArea()}
-        <p>character count: {this.state.charactercount}</p>
+      <div className="App">
+        <textarea
+          cols="80"
+          rows="25"
+          onChange={this.updateFieldLength.bind(this)}
+        ></textarea>
+        <br />
+        {this.renderFieldLength()}
       </div>
     );
   }
 }
 
-export default fieldlength;
+export default App;
