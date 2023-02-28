@@ -16,6 +16,11 @@ class App extends Component {
     this.setState({ field });
   }
 
+  submitForm() {
+    alert("hello");
+    console.log("submitting form...");
+  }
+
   render() {
     return (
       <div className="App">
@@ -26,6 +31,7 @@ class App extends Component {
         ></textarea>
         <br />
         {this.renderFieldLength()}
+        <button onClick={this.submitForm}>submit post</button>
       </div>
     );
   }
