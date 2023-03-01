@@ -1,10 +1,11 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       field: "",
+      submitDisabled: true,
     };
   }
 
@@ -13,12 +14,19 @@ class App extends Component {
   }
   updateFieldLength(event) {
     const field = event.target.value;
-    this.setState({ field });
+    this.setState({ field }, () => this.validateFieldLength());
   }
 
-  submitForm() {
-    alert("hello");
-    console.log("submitting form...");
+  submitForm(event) {
+    alert("Submitting the blog post");
+  }
+
+  validateFieldLength() {
+    if (this.state.submitDisabled && this.state.field.length > 100) {
+      this.setState({ submitDisabled: false });
+    } else if (this.state.submitDisabled && this.state.field.length <= 100) {
+      this.setState({ submitDisabled: true });
+    }
   }
 
   render() {
@@ -35,7 +43,9 @@ class App extends Component {
         ></textarea>
         <br />
         {this.renderFieldLength()}
-        <button onClick={this.submitForm}>submit post</button>
+        <button disabled={this.state.submitDisabled} onClick={this.submitForm}>
+          submit post
+        </button>
       </div>
     );
   }
