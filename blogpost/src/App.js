@@ -24,6 +24,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <h1>Blog Post Writer</h1>
+        <hr />
+        <strong>Write your blog post here</strong>
+        <p>Must be at least 100 characters</p>
         <textarea
           cols="80"
           rows="25"
