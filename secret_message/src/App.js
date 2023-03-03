@@ -11,6 +11,9 @@ class App extends Component {
 
   // this is conditional renderer
   secretMessage() {
+    if (!this.state.showSecret) {
+      return;
+    } //this is a guard clause; to be added at the top of the function to avoid unnecessary work
     return <div className="secret-mesasge">I am the secret message</div>;
   }
 
@@ -24,7 +27,7 @@ class App extends Component {
     return (
       <div className="App">
         <button onClick={this.toggleSecretMessage.bind(this)}>
-          Click to show the secret message!
+          Click to {this.state.showSecret ? "hide" : "show"} the secret message!
         </button>
         {this.secretMessage()}
       </div>
