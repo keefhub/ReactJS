@@ -37,6 +37,9 @@ class App extends Component {
 
   displayQuestion(index) {
     const question = this.state.questions[index];
+    if (this.state.playerScore < index) {
+      return;
+    }
     return (
       <div className="question-display">
         <p className="question">{question.question}</p>
@@ -64,6 +67,18 @@ class App extends Component {
     );
   }
 
+  displayResult(index) {
+    const question = this.state.questions[index];
+    if (!question.playerChoice) {
+      return;
+    }
+    if (question.playerChoice === question.rightAnswer) {
+      return <p className="result-correct">Your answer is correct</p>;
+    } else {
+      return <p className="result-incorrect">Your answer is incorrect</p>;
+    }
+  }
+
   answerQuestion(index, choice) {
     const answeredQuestion = this.state.questions[index];
     answeredQuestion.playerChoice = choice;
@@ -72,6 +87,14 @@ class App extends Component {
     this.setState({ questions: allQuestions }, () => {
       this.updatePlayerScore();
     });
+  }
+
+  updatePlayerScore() {
+    const playerScore = this.state.questions.filter(
+      (q) => q.rightAnswer === q.playerChoice
+    ).length;
+    this.setState({ playerScore });
+    console.log("the new player score", playerScore);
   }
 
   render() {
