@@ -15,9 +15,8 @@ return(
         );
     }
 
-}
-
-export default App;
+    }
+    export default App;
 
 ## subrender()
 
@@ -41,4 +40,4 @@ export default App;
 
     };
 
-}
+    }
