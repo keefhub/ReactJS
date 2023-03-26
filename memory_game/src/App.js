@@ -1,42 +1,50 @@
 import "./App.css";
 import React, { Component } from "react";
 
-class App extends Component() {
+const max_tiles = 24;
+
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      clicks: 0,
-      tiles: [
-        {
-          number: 10,
-        },
-        {
-          number: 9,
-        },
-        {
-          number: 7,
-        },
-      ],
+      click_count: 0,
+      tiles: [],
     };
   }
 
-  displayTiles(index) {
-    const tile = this.state.tiles[index];
-    return (
-      <div className="display-tiles">
-        <p className="tiles">{tile.number}</p>
-      </div>
-    );
+  resetTiles() {
+    let tiles = [];
+    let number = 0;
+
+    for (let i = 0; i < max_tiles; i += 2) {
+      number++;
+
+      //creating 2 tiles of the same number
+      let tileOne = { flipped: true, matched: false, number };
+      let tileTwo = { flipped: true, matched: false, number };
+
+      //using spread operator,
+      tiles = [...tiles, tileOne, tileTwo];
+    }
+
+    for (let i = 0; i <= tiles.length; i++) {
+      //randomizing tiles
+      const swapTiles = Math.floor(Math.random * tiles.length);
+      //swapping tiles
+      [tiles[i], tiles[swapTiles]] = [tiles[swapTiles], tiles[i]];
+    }
   }
 
   render() {
     return (
       <div className="App">
-        <h1>Memory Game</h1>
+        <h1>Greatest Game Ever</h1>
+        <strong>Clicks {this.state.click_count}</strong>
+        <br />
+        <button onClick={this.resetTiles} className="reset-button">
+          New Game
+        </button>
         <hr />
-        {this.displayTiles(0)}
-        {this.displayTiles(1)}
-        {this.displayTiles(2)}
       </div>
     );
   }
