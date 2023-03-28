@@ -1,4 +1,5 @@
 import express from "express";
+import nodemon from "nodemon";
 
 let articlesInfo = [
   {
@@ -25,7 +26,7 @@ app.put("/api/articles/:name/upvote", (req, res) => {
   const article = articlesInfo.find((a) => a.name === name);
   if (article) {
     article.upvotes += 1;
-    res.send(`the ${name} article has now ${article.upvotes} upvotes`);
+    res.send(`the ${name} article has now ${article.upvotes} upvotes!`);
   } else {
     res.send("the article doesn't exist");
   }
