@@ -1,24 +1,26 @@
 import express from "express";
-import nodemon from "nodemon";
-
-let articlesInfo = [
-  {
-    name: "learn-react",
-    upvotes: 0,
-  },
-  {
-    name: "learn-node",
-    upvotes: 0,
-  },
-  {
-    name: "mongodb",
-    upvotes: 0,
-  },
-];
+import { MongoClient } from "mongodb";
 
 //creating express server
 const app = express();
 app.use(express.json()); //when it receives req with json payload, parse it automatically into req.body
+
+//loading info 
+app.get('/api/articles/:name', async (req,res) =>{
+  const {name} = req.params;
+
+  const client = new MongoClient('mongodb://127.0.0.1:27017'); //actual ip required for this to work trying to access mongoldb access driver port
+  await client.connect();
+
+  const db = client.db('react-blog-db'); 
+  const article = await db.collection('articles').findOne({name}); 
+  if (article){
+    res.json(article);
+  } else {
+    res.sendStatus(404).send('Article not found');
+  }
+  
+})
 
 //creating upvote endpoint
 app.put("/api/articles/:name/upvote", (req, res) => {
@@ -26,11 +28,26 @@ app.put("/api/articles/:name/upvote", (req, res) => {
   const article = articlesInfo.find((a) => a.name === name);
   if (article) {
     article.upvotes += 1;
-    res.send(`the ${name} article has now ${article.upvotes} upvotes!`);
+    res.send(`the ${name} article has now ${article.upvotes} upvotes`);
   } else {
     res.send("the article doesn't exist");
   }
 });
+
+//adding comments to article
+app.post('/api/articles/:name/comments', (req,res) =>{
+  const {name} = req.params;
+  const {postedBy,text} = req.body;
+
+  const article = articlesInfo.find(a => a.name === name);
+
+  if (article){
+    article.comments.push({postedBy, text});
+    res.send(article.comments);
+  } else{
+    res.send("the article doesn't exist");
+  }
+}) 
 
 app.listen(8000, () => {
   console.log("Server is listening on port 8000");
