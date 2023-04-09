@@ -10,11 +10,6 @@ app.use(express.json()); //when it receives req with json payload, parse it auto
 app.get("/api/articles/:name", async (req, res) => {
   const { name } = req.params;
 
-  //this connects to mongodb
-  const client = new MongoClient("mongodb://127.0.0.1:27017"); //actual ip required for this to work trying to access mongoldb access driver port
-  await client.connect();
-
-  const db = client.db("react-blog-db");
   const article = await db.collection("articles").findOne({ name });
 
   if (article) {
@@ -28,18 +23,13 @@ app.get("/api/articles/:name", async (req, res) => {
 app.put("/api/articles/:name/upvote", async (req, res) => {
   const { name } = req.params;
 
-  //connecting to db
-  const client = new MongoClient("mongodb://127.0.0.1:27017"); //actual ip required for this to work trying to access mongoldb access driver port
-  await client.connect();
-
-  const db = client.db("react-blog-db");
   //query to db
   await db.collection("articles").updateOne({ name }, { $inc: { upvotes: 1 } });
 
   const article = await db.collection("articles").findOne({ name });
 
   if (article) {
-    res.send(`the ${name} article has now ${article.upvotes} upvotes`);
+    res.json(article);
   } else {
     res.send("the article doesn't exist");
   }
@@ -50,11 +40,6 @@ app.post("/api/articles/:name/comments", async (req, res) => {
   const { name } = req.params;
   const { postedBy, text } = req.body;
 
-  //connecting to db
-  const client = new MongoClient("mongodb://127.0.0.1:27017"); //actual ip required for this to work trying to access mongoldb access driver port
-  await client.connect();
-
-  const db = client.db("react-blog-db");
   //query to db
   await db.collection("articles").updateOne(
     { name },
@@ -66,7 +51,7 @@ app.post("/api/articles/:name/comments", async (req, res) => {
   const article = await db.collection("articles").findOne({ name });
 
   if (article) {
-    res.send(article.comments);
+    res.json(article);
   } else {
     res.send("the article doesn't exist");
   }
