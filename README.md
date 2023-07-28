@@ -4,5 +4,6 @@ are YouTube, books and Google..
 
 The tools which I will use while learning react are:
 Node.js,
+React Native,
 VS code and
 Operating on Ubuntu 22.04
