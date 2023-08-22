@@ -1,6 +1,7 @@
 import ImageCarousel from "./slider/Slider";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "./slider/Images";
 import "./App.css";
 
 function App() {
