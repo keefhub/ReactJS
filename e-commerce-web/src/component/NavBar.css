@@ -1,0 +1,19 @@
+.nav-bar {
+  width: 100%;
+  background-color: #0e1d35;
+  display: flex;
+  justify-content: flex-end;
+  height: 75px;
+}
+
+.links {
+  margin-right: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.links a {
+  color: aliceblue;
+  text-decoration: none;
+  margin-left: 20px;
+}

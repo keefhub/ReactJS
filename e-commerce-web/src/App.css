@@ -1,0 +1,27 @@
+.addToCart {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff; /* Change to your desired background color */
+  color: #fff; /* Text color */
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth background color transition */
+  text-align: center;
+}
+
+.addToCart:hover {
+  background-color: #0056b3; /* Change to a slightly different shade on hover */
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.products img {
+  height: 200px;
+  width: 200px;
+}
